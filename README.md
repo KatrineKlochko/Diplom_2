@@ -8,16 +8,16 @@
 
 Используемые технологии:
 
-| технология          | версия |
-|---------------------|--------|
-| Java                | 11     |
-| Maven               |        |
-| REST Assured        | 5.5.6  |
-| Allure Framework    | 2.15.0 |
-| JUnit               | 4.13.2 |
-| Gson                | 2.13.2 |
-| AspectJ Weaver      | 1.9.21 |
-| Allure Maven Plugin | 2.10.0 |
+| технология            | версия |
+|-----------------------|--------|
+| Java                  | 11     |
+| Maven Surefire Plugin | 2.22.2 |
+| REST Assured          | 5.5.6  |
+| Allure Framework      | 2.15.0 |
+| JUnit                 | 4.13.2 |
+| Gson                  | 2.13.2 |
+| AspectJ Weaver        | 1.9.21 |
+| Allure Maven Plugin   | 2.10.0 |
 
 
 
