@@ -9,6 +9,7 @@ import org.junit.Test;
 import ru.yandex.practicum.model.User;
 import ru.yandex.practicum.steps.UserSteps;
 import static org.hamcrest.CoreMatchers.is;
+import static org.apache.http.HttpStatus.*;
 
 public class UserLoginTests extends BaseTest{
 
@@ -33,7 +34,7 @@ public class UserLoginTests extends BaseTest{
     public void shouldLoginUserTest(){
         userSteps
                 .loginUser(user)
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .body("success", is(true));
     }
 
@@ -45,7 +46,7 @@ public class UserLoginTests extends BaseTest{
                 .setPassword(RandomStringUtils.randomAlphabetic(12));
         userSteps
                 .loginUser(nonExistingUser)
-                .statusCode(401)
+                .statusCode(SC_UNAUTHORIZED)
                 .body("message", is("email or password are incorrect"));
     }
 
@@ -57,7 +58,7 @@ public class UserLoginTests extends BaseTest{
                 .setEmail((RandomStringUtils.randomAlphabetic(12)) + "@ya.ru");
         userSteps
                 .loginUser(nonExistingUser)
-                .statusCode(401)
+                .statusCode(SC_UNAUTHORIZED)
                 .body("message", is("email or password are incorrect"));
     }
 

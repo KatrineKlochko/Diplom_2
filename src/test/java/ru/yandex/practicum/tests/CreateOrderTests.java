@@ -12,6 +12,7 @@ import ru.yandex.practicum.steps.OrderSteps;
 import ru.yandex.practicum.steps.UserSteps;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.apache.http.HttpStatus.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,11 +47,11 @@ public class CreateOrderTests extends BaseTest{
     @Description("Тест на успешное создание заказа с ингридиентами и авторизацией для /api/orders эндпоинт")
     public void shouldCreateOrderWithAuthTest() {
 
-        Order order = new Order(Arrays.asList(OrderSteps.ING_1, OrderSteps.ING_2));
+        Order order = new Order(Arrays.asList(OrderSteps.ING_BUN, OrderSteps.ING_MAIN));
 
         orderSteps
                 .createOrder(accessToken, order)
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .body("success", is(true))
                 .body("order.number", notNullValue());
     }
@@ -60,11 +61,11 @@ public class CreateOrderTests extends BaseTest{
     @Description("Тест на успешное создание заказа с ингридиентами без авторизации для /api/orders эндпоинт")
     public void shouldCreateOrderWithoutAuthTest() {
 
-        Order order = new Order(Arrays.asList(OrderSteps.ING_1, OrderSteps.ING_2));
+        Order order = new Order(Arrays.asList(OrderSteps.ING_BUN, OrderSteps.ING_MAIN));
 
         orderSteps
                 .createOrder(null, order)
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .body("success", is(true))
                 .body("order.number", notNullValue());
     }
@@ -78,7 +79,7 @@ public class CreateOrderTests extends BaseTest{
 
         orderSteps
                 .createOrder(accessToken, order)
-                .statusCode(400)
+                .statusCode(SC_BAD_REQUEST)
                 .body("message", is("Ingredient ids must be provided"));
     }
 
@@ -91,7 +92,7 @@ public class CreateOrderTests extends BaseTest{
 
         orderSteps
                 .createOrder(accessToken, order)
-                .statusCode(500);
+                .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 
     @After

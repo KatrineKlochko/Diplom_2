@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.yandex.practicum.model.User;
 import ru.yandex.practicum.steps.UserSteps;
+import static org.apache.http.HttpStatus.*;
 
 import static org.hamcrest.CoreMatchers.is;
 
@@ -32,7 +33,7 @@ public class UserCreateTests extends BaseTest {
     public void shouldCreateUserTest(){
         userSteps
                 .createUser(user)
-                .statusCode(200)
+                .statusCode(SC_OK)
                 .body("success", is(true))
                 .extract()
                 .path("accessToken");
@@ -46,7 +47,7 @@ public class UserCreateTests extends BaseTest {
                 .createUser(user);
         userSteps
                 .createUser(user)
-                .statusCode(403)
+                .statusCode(SC_FORBIDDEN)
                 .body("message", is("User already exists"));
     }
 
@@ -57,7 +58,7 @@ public class UserCreateTests extends BaseTest {
         user.setEmail("");
         userSteps
                 .createUser(user)
-                .statusCode(403)
+                .statusCode(SC_FORBIDDEN)
                 .body("message", is("Email, password and name are required fields"));
     }
 
@@ -68,7 +69,7 @@ public class UserCreateTests extends BaseTest {
         user.setPassword("");
         userSteps
                 .createUser(user)
-                .statusCode(403)
+                .statusCode(SC_FORBIDDEN)
                 .body("message", is("Email, password and name are required fields"));
     }
 
@@ -79,7 +80,7 @@ public class UserCreateTests extends BaseTest {
         user.setName("");
         userSteps
                 .createUser(user)
-                .statusCode(403)
+                .statusCode(SC_FORBIDDEN)
                 .body("message", is("Email, password and name are required fields"));
     }
 
